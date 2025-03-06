@@ -1,5 +1,6 @@
 package com.sourceallies.interview;
 
+import com.sourceallies.interview.Card.*;
 import java.util.HashMap;
 import java.util.Arrays;
 
@@ -29,9 +30,9 @@ public class PokerHand {
     }
 
     private PokerRank calcRank() {
-        if (isStraightFlush()){
+        if (isStraightFlush()) {
             return PokerRank.STRAIGHTFLUSH;
-        }else if (isFourOfAKind()){
+        } else if (isFourOfAKind()) {
             return PokerRank.FOUROFAKIND;
         } else if (isFullHouse()) {
             return PokerRank.FULLHOUSE;
