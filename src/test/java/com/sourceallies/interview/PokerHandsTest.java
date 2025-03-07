@@ -1,49 +1,53 @@
 package com.sourceallies.interview;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-public class PokerHandsTest{
+import com.sourceallies.interview.Card.Card;
+import com.sourceallies.interview.Card.CardValue;
+
+public class PokerHandsTest {
 
     @Test
-    void shouldBeHighCard(){
+    void shouldBeHighCard() {
         PokerHand hand = new PokerHand("2H 3D 5S 9C KD");
         assertEquals(PokerRank.HIGHCARD, hand.getRank());
     }
 
     @Test
-    void shouldBePair(){
+    void shouldBePair() {
         PokerHand hand = new PokerHand("2H 2D 5S 9C KD");
         assertEquals(PokerRank.PAIR, hand.getRank());
     }
 
     @Test
-    void shouldBeTwoPair(){
+    void shouldBeTwoPair() {
         PokerHand hand = new PokerHand("2H 2D 5S 5C 3D");
         assertEquals(PokerRank.TWOPAIRS, hand.getRank());
     }
 
     @Test
-    void shouldBeThreeOfAKind(){
+    void shouldBeThreeOfAKind() {
         PokerHand hand = new PokerHand("2H 5D 5S 5C 3D");
         assertEquals(PokerRank.THREEOFAKIND, hand.getRank());
     }
 
     @Test
-    void shouldBeStraight_preSort(){
+    void shouldBeStraight_preSort() {
         PokerHand hand = new PokerHand("2H 3C 4S 5H 6H");
         assertEquals(PokerRank.STRAIGHT, hand.getRank());
     }
 
     @Test
-    void shouldBeStraight_withSort(){
+    void shouldBeStraight_withSort() {
         PokerHand hand = new PokerHand("2H 3C 4S 6H 5H");
         assertEquals(PokerRank.STRAIGHT, hand.getRank());
     }
 
     @Test
-    void shouldBeFlush(){
+    void shouldBeFlush() {
         PokerHand heartsFlush = new PokerHand("2H 5H 8H 4H 6H");
         PokerHand diamondsFlush = new PokerHand("2D 5D 8D 4D 6D");
         PokerHand spadesFlush = new PokerHand("2S 5S 8S 4S 6S");
@@ -55,7 +59,7 @@ public class PokerHandsTest{
     }
 
     @Test
-    void shouldBeFullHouse(){
+    void shouldBeFullHouse() {
         PokerHand flush = new PokerHand("2H 2C 2S 3H 3H");
         assertEquals(PokerRank.FULLHOUSE, flush.getRank());
     }
@@ -76,5 +80,17 @@ public class PokerHandsTest{
     void shouldNotBeStraightFlush() {
         PokerHand straightFlush = new PokerHand("2H 3H 4H 5H 7H");
         assertEquals(PokerRank.FLUSH, straightFlush.getRank());
+    }
+
+    @Test
+    void shouldBeGetHighCardKD() {
+        PokerHand hand = new PokerHand("2H 3D 5S 9C KD");
+        assertTrue(new Card("KD").equals(hand.getTieBreakCard()));
+    }
+
+    @Test
+    void shouldBeGetHighCardAD() {
+        PokerHand hand = new PokerHand("2H AD 3S 9C KD");
+        assertTrue(new Card("AD").equals(hand.getTieBreakCard()));
     }
 }

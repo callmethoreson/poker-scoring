@@ -10,6 +10,8 @@ public class PokerHand {
     private PokerRank rank;
     private HashMap<CardValue, Integer> counts;
 
+    private Card tieBreakCard;
+
     PokerHand(String hand) {
         this.hand = hand;
         this.cards = convertHandToCards();
@@ -47,8 +49,24 @@ public class PokerHand {
         } else if (containsPair()) {
             return PokerRank.PAIR;
         } else {
+            calcRankForHighCard();
             return PokerRank.HIGHCARD;
         }
+    }
+
+    private void calcRankForHighCard() {
+        Card tempCard = cards[0];
+
+        for (Card c : cards) {
+            if (c == cards[0])
+                continue;
+            if (c.compareTo(tempCard) >= 0) {
+                tempCard = c;
+            }
+        }
+
+        this.tieBreakCard = tempCard;
+
     }
 
     private boolean containsPair() {
@@ -124,6 +142,10 @@ public class PokerHand {
 
     public PokerRank getRank() {
         return rank;
+    }
+
+    public Card getTieBreakCard() {
+        return tieBreakCard;
     }
 
     // Helper Functions
