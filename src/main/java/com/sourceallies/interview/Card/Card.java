@@ -20,6 +20,30 @@ public class Card implements Comparable<Card> {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof Card)) {
+            return false;
+        }
+
+        Card c = (Card) o;
+
+        if (this.compareTo(c) == 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return Character.toString(this.value.getChar()) + Character.toString(this.suit.getChar());
+    }
+
     public Suit getSuit() {
         return this.suit;
     }
