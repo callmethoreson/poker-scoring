@@ -79,8 +79,10 @@ public class PokerHand {
 
     private boolean isThreeOfAKind() {
         for (CardValue key : this.counts.keySet()) {
-            if (counts.get(key) == 3)
+            if (counts.get(key) == 3) {
+                this.tieBreakCard = new Card(key.getChar() + "H");
                 return true;
+            }
         }
 
         return false;
@@ -151,11 +153,17 @@ public class PokerHand {
     // Helper Functions
     private int countPairs() {
         int pairCount = 0;
+        CardValue highCardValue = CardValue.init('2');
         for (CardValue key : this.counts.keySet()) {
             if (this.counts.get(key) == 2) {
+                if (key.getInt() > highCardValue.getInt()) {
+                    highCardValue = key;
+                }
                 pairCount++;
             }
         }
+        // this.tieBreakCard = new Card(highCardValue + "H");
+        this.tieBreakCard = new Card(highCardValue.getChar() + "H");
         return pairCount;
     }
 
