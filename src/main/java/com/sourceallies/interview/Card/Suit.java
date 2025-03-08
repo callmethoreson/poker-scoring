@@ -20,4 +20,8 @@ public enum Suit {
         }
         return suit;
     }
+
+    public char getChar() {
+        return this.suit;
+    }
 }
