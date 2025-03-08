@@ -37,4 +37,8 @@ public enum CardValue {
         return CARD_ORDER.indexOf(this.value);
     }
 
+    public char getChar() {
+        return value;
+    }
+
 }
