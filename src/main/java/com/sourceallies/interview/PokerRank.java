@@ -21,9 +21,6 @@ public enum PokerRank {
         return rank;
     }
 
-<<<<<<< HEAD
     // Testing for new commit
 
-=======
->>>>>>> d4c3823 (outlining logic for hand comparisons)
 }
